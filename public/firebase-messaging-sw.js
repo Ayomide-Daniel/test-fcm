@@ -1,9 +1,9 @@
 // Scripts for firebase and firebase messaging
 importScripts(
-  "https://www.gstatic.com/firebasejs/<v9+>/firebase-app-compat.js"
+  "https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"
 );
 importScripts(
-  "https://www.gstatic.com/firebasejs/<v9+>/firebase-messaging-compat.js"
+  "https://www.gstatic.com/firebasejs/9.17.1/firebase-messaging-compat.js"
 );
 const firebaseConfig = {
   apiKey: "AIzaSyDac77e7RyXxZ4hFYqsoH9N41krF1U7fTE",
@@ -29,3 +29,14 @@ messaging.onBackgroundMessage(function (payload) {
 
   self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("./firebase-messaging-sw.js")
+    .then(function (registration) {
+      console.log("Registration successful, scope is:", registration.scope);
+    })
+    .catch(function (err) {
+      console.log("Service worker registration failed, error:", err);
+    });
+}
