@@ -29,7 +29,7 @@ function requestPermission() {
         .then((currentToken) => {
           console.log("currentToken", currentToken);
           if (currentToken) {
-            // send token to server
+            document.getElementById("my-token").innerHTML = currentToken;
           }
         })
         .catch((err) => {
