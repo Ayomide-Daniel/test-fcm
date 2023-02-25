@@ -1,6 +1,5 @@
 // push notifications using firebase cloud messaging
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDac77e7RyXxZ4hFYqsoH9N41krF1U7fTE",

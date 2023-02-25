@@ -1,4 +1,6 @@
 import { app } from "../../firebase-messaging-sw.js";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+
 // request permission to send notifications
 const messaging = getMessaging(app);
 
