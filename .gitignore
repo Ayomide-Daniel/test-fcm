@@ -1,3 +1,5 @@
 .env
 node_modules/
 dist/
+public/assets/
+public/firebase-messaging-sw.js

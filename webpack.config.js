@@ -30,5 +30,5 @@ var serviceWorkerConfig = Object.assign({}, config,{
 // Return Array of Configurations
 module.exports = [
     appConfig,
-    serviceWorkerConfig
+    // serviceWorkerConfig
 ];
