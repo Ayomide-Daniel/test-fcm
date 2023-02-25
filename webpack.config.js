@@ -1,18 +1,34 @@
 const path = require("path");
 
-module.exports = {
-  // The entry point file described above
-  entry: "./src/js/app.js",
-  // The location of the build folder described above
-  output: {
-    path: path.resolve(__dirname, "public/assets/js"),
-    filename: "app.js",
-  },
-  // Optional and for development only. This provides the ability to
-  // map the built code back to the original source format when debugging.
-  devtool: "eval-source-map",
-  resolve: {
-    fallback: {
-    },
-  },
+var config = {
+    // TODO: Add common Configuration
+    module: {},
 };
+
+var appConfig = Object.assign({}, config, {
+    name: "app",
+    entry: "./src/js/app.js",
+    output: {
+        path: path.resolve(__dirname, "public/assets/js"),
+        filename: "app.js",
+    },
+        devtool: "eval-source-map",
+
+});
+
+var serviceWorkerConfig = Object.assign({}, config,{
+    name: "serviceWorker",
+    entry: "./src/firebase-messaging-sw.js",
+    output: {
+       path: path.resolve(__dirname, "public"),
+       filename: "firebase-messaging-sw.js",
+    },
+        devtool: "eval-source-map",
+
+});
+
+// Return Array of Configurations
+module.exports = [
+    appConfig,
+    serviceWorkerConfig
+];
