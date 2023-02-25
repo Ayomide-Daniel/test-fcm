@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   // The entry point file described above
-  entry: "./public/assets/js/app.js",
+  entry: "./src/js/app.js",
   // The location of the build folder described above
   output: {
     path: path.resolve(__dirname, "dist"),
