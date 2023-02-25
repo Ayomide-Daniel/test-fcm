@@ -1,8 +1,10 @@
 // Scripts for firebase and firebase messaging
-import {
-  initializeApp,
-  getMessaging,
-} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+importScripts(
+ "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"
+); 
+importScripts(
+  "https://www.gstatic.com/firebasejs/9.17.1/firebase-messaging.js"
+);
 const firebaseConfig = {
   apiKey: "AIzaSyDac77e7RyXxZ4hFYqsoH9N41krF1U7fTE",
   authDomain: "obtainly-local.firebaseapp.com",
@@ -12,10 +14,10 @@ const firebaseConfig = {
   appId: "1:385414976213:web:909bdbe899c84cbc55885c",
 };
 
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 // request permission to send notifications
-const messaging = getMessaging(app);
+const messaging = firebase.getMessaging(app);
 
 messaging.onBackgroundMessage(function (payload) {
   console.log("Received background message ", payload);
