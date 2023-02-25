@@ -21,20 +21,33 @@ function requestPermission() {
   Notification.requestPermission().then((permission) => {
     if (permission === "granted") {
       console.log("Notification permission granted.");
-      // get token in the form of promise
-      getToken(messaging, {
-        vapidKey:
-          "BMHgsxsPzk0IZNS53nnzG9TlhrZ5aH7x63aW-eNom31FPTNmfAeMGIYUAXDnoWWqK5AXwk9ZEMNnkF5iZU0aPf4",
-      })
-        .then((currentToken) => {
-          console.log("currentToken", currentToken);
-          if (currentToken) {
-            // send token to server
-          }
-        })
-        .catch((err) => {
-          console.log("An error occurred while retrieving token. ", err);
-        });
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("../../firebase-messaging-sw.js")
+          .then(function (registration) {
+            console.log(
+              "Registration successful, scope is:",
+              registration.scope
+            );
+            // get token in the form of promise
+            getToken(messaging, {
+              vapidKey:
+                "BMHgsxsPzk0IZNS53nnzG9TlhrZ5aH7x63aW-eNom31FPTNmfAeMGIYUAXDnoWWqK5AXwk9ZEMNnkF5iZU0aPf4",
+            })
+              .then((currentToken) => {
+                console.log("currentToken", currentToken);
+                if (currentToken) {
+                  // send token to server
+                }
+              })
+              .catch((err) => {
+                console.log("An error occurred while retrieving token. ", err);
+              });
+          })
+          .catch(function (err) {
+            console.log("Service worker registration failed, error:", err);
+          });
+      }
     } else {
       console.log("Unable to get permission to notify.");
     }
@@ -52,3 +65,14 @@ onMessage(messaging, (payload) => {
 });
 
 requestPermission();
+
+// if ("serviceWorker" in navigator) {
+//   navigator.serviceWorker
+//     .register("./firebase-messaging-sw.js")
+//     .then(function (registration) {
+//       console.log("Registration successful, scope is:", registration.scope);
+//     })
+//     .catch(function (err) {
+//       console.log("Service worker registration failed, error:", err);
+//     });
+// }
